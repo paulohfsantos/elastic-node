@@ -7,5 +7,6 @@ const elasticController = new ElasticController();
 
 router.get("/", elasticController.getIndex);
 router.post("/create", elasticController.createIndex);
-router.get("/search", elasticController.searchIndex);
-router.delete("/delete", elasticController.deleteIndex);
+router.get("/search-all", elasticController.searchIndex);
+router.get("/search/:id", elasticController.getOne);
+router.delete("/delete/:id", elasticController.deleteIndex);

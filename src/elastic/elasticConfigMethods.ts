@@ -28,9 +28,9 @@ const options = {
     username: process.env.AUTH as string,
     password: process.env.PASSWORD as string,
   },
-  // maxRetries: 5,
-  // connectionPool: MyConnectionPool,
-  // serializer: MySerializer,
+  maxRetries: 5,
+  connectionPool: MyConnectionPool,
+  serializer: MySerializer,
 }
 
 export const elasticClient = new Client(options);

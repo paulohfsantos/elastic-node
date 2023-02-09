@@ -6,28 +6,27 @@ export class ElasticService {
   }
 
   createIndex = async (name: string, age: number) => {
-    try {
-      const response = await elasticClient.index({
-        index: "test",
-        body: { name, age },
-      });
-    
-      return response;
-    } catch (error) {
-      return error;
-    }
+    const response = await elasticClient.index({
+      index: "test",
+      body: { name, age },
+    });
+  
+    return response;
   }
 
-  searchIndex = async (name: string) => {
+  searchAll = async () => {
     const response = await elasticClient.search({
       index: "test",
       body: {
-        query: { match_all: {
-          _name: name,
-        }},
+        query: { match_all: {}},
       },
     });
 
+    return response;
+  }
+
+  searchOne = async (id: string) => {
+    const response = await elasticClient.get({ index: "test", id });
     return response;
   }
 

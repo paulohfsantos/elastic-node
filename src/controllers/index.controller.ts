@@ -12,7 +12,19 @@ export class ElasticController {
 
   createIndex = async (req: Request, res: Response) => {
     try {
-      const response = await elasticService.createIndex(req.body.name, req.body.age);
+      const response: unknown = await elasticService.createIndex(
+        req.body.name,
+        req.body.age
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+
+  getOne = async (req: Request, res: Response) => {
+    try {
+      const response = await elasticService.searchOne(req.params.id);
       res.status(200).json(response);
     } catch (error) {
       res.status(500).json(error);
@@ -21,8 +33,8 @@ export class ElasticController {
 
   searchIndex = async (req: Request, res: Response) => {
     try {
-      const response = await elasticService.searchIndex(req.body.name);
-      res.status(200).json(response);
+      const response = await elasticService.searchAll();
+      res.status(200).json(response.hits);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -30,7 +42,7 @@ export class ElasticController {
 
   deleteIndex = async (req: Request, res: Response) => {
     try {
-      const response = await elasticService.deleteIndex(req.body.id);
+      const response: unknown = await elasticService.deleteIndex(req.body.id);
       res.status(200).json(response);
     } catch (error) {
       res.status(500).json(error);
